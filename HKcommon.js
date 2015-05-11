@@ -104,11 +104,6 @@ var SIPUcommon = (function(SIPUcommon, $, undefined) {
 
 
     SIPUcommon.run = function() {
-		$(document).ready(function () {
-
-			var node = getNodeList("HK-data");
-    		console.log(node);
-		});
 	};
     return SIPUcommon;
 })(window.SIPUcommon || {}, jQuery);
