@@ -9,10 +9,9 @@
   The Latest Version
   ------------------
 
-  Details of the latest version can be found on the Apache HTTP
-  server project page under https://github.com/sipubot/JsCommons/
+  Details of the latest version can be found on the 
+  https://github.com/sipubot/JsCommons/
 
-  
   
   Installation
   ------------
