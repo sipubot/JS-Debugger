@@ -17,7 +17,7 @@
   ------------
 
   Please see the file SIPUcommomns.js copy your source folder and load html (ex. 
-    \<script src=\"SIPUcommons.js\"\>\<\/script\>
+    \<script src="SIPUcommons.js"\>\</script\>
 
   Use 
   ------------
