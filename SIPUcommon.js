@@ -102,6 +102,5 @@ var SIPUcommon = (function(SIPUcommon, $, undefined) {
 	};
     return SIPUcommon;
 })(window.SIPUcommon || {}, jQuery);
-
 SIPUcommon.run();
-			"wefwe".getTag();
+		
