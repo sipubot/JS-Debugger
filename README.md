@@ -9,43 +9,27 @@
   The Latest Version
   ------------------
 
-  Details of the latest version can be found on the 
+  Details of the latest version can be found on the
   https://github.com/sipubot/JsCommons/
 
-  
+
   Installation
   ------------
+  !!!Need JQUERY
+  and
+  Please see the file SIPUdebuger.js copy your source folder and load html (ex.
+    \<script src="SIPUdebuger.js"\>\</script\>
 
-  Please see the file SIPUcommomns.js copy your source folder and load html (ex. 
-    \<script src="SIPUcommons.js"\>\</script\>
-
-  Use 
+  Use
   ------------
-  in Script. you want know Objects Type write
-    
-    Method list :
-      .getType
-      .getNode
-  
-    Example : 
-    
-    var type = Obj.getType(); or Obj.getType("log");
-    console.log(type.Type);
-    console.log(type.Value);
-    console.log(type.StructValue);
-    
-    var node = "#aaa".getNode(); or var node = "aaa".getNode();
-    console.log(node.CssName);
-    console.log(node.NodeName);
-    //if you wrong nodeName console 'not Node!' print out.
-    
-    
+  Show layOut :         Ctrl + Alt + S;
+  Show Trigger Event :  Ctrl + Alt + A;
+
   Licensing
   ---------
 
   Please see the file called SIPU LICENSE. & MIT(JQUERY)
-  
+
   Contacts
   --------
     ddasik9901@gmail.com
-     
