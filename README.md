@@ -17,12 +17,14 @@
   ------------
   !!!Need JQUERY
   and
-  Please see the file SIPUdebuger.js copy your source folder and load html (ex.
-    \<script src="SIPUdebuger.js"\>\</script\>
+  Please see the file SIPUdebuger.js copy your source folder and load html
+
+  \<script src="SIPUdebuger.js"\>\</script\>
 
   Use
   ------------
   Show layOut :         Ctrl + Alt + S;
+
   Show Trigger Event :  Ctrl + Alt + A;
 
   Licensing
