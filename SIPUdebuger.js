@@ -1,10 +1,29 @@
 var SIPUcommon = (function (SIPUcommon, $, undefined) {
 
 	var DEBUGER = {
-		status: false,
-		statusEvent: false,
-		addNode: '<q sipu-common="" style="padding : 0; margin : 0 auto; position: absolute; border : 1px dotted red; float: right; font-size:3px; text-align:right; clear:both"></q>',
-		attrName: "sipu-common"
+		LAYOUT : {
+			STATUS : false,
+			KEYEVENT : function (e) {
+				if (e.which == 83 && e.shiftKey === true && e.ctrlKey === true) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+		},
+		EVENT : {
+			STATUS : false,
+			KEYEVENT : function (e) {
+					if (e.which == 65 && e.shiftKey === true && e.ctrlKey === true) {
+						return true;
+					} else {
+						return false;
+					}
+			}
+		},
+		ADDELEMENT: '<q sipu-common="" style="padding : 0; margin : 0 auto; position: absolute; border : 1px dotted red; float: right; font-size:3px; text-align:right; clear:both"></q>',
+		ATTRNAME: "sipu-common"
+
 	};
 
 	SIPUcommon.showLayout = function (bool) {
@@ -13,13 +32,13 @@ var SIPUcommon = (function (SIPUcommon, $, undefined) {
 			var node = document.body.getElementsByTagName("*");
 			for (i = 0; i < node.length; i++) {
 				if (node[i].innerHTML.length > 0) {
-					node[i].innerHTML = DEBUGER.addNode + node[i].innerHTML;
+					node[i].innerHTML = DEBUGER.ADDELEMENT + node[i].innerHTML;
 				}
 			}
 			return (function () {
 				var node = document.body.getElementsByTagName("*");
 				for (i = 0; i < node.length; i++) {
-					if (node[i].hasAttribute(DEBUGER.attrName)) {
+					if (node[i].hasAttribute(DEBUGER.ATTRNAME)) {
 						node[i].innerHTML = "ID:" + node[i].parentNode.getAttribute('id') + "	CLASS:" + node[i].parentNode.getAttribute('class');
 						node[i].style.width = (node[i].parentNode.offsetWidth - 2).toString() + "px";
 						node[i].style.height = (node[i].parentNode.offsetHeight - 2).toString() + "px";
@@ -29,7 +48,7 @@ var SIPUcommon = (function (SIPUcommon, $, undefined) {
 		} else {
 			var el = document.body.getElementsByTagName("*");
 			for (i = 0; i < el.length; i++) {
-				if (el[i].hasAttribute(DEBUGER.attrName)) {
+				if (el[i].hasAttribute(DEBUGER.ATTRNAME)) {
 					el[i].parentNode.removeChild(el[i]);
 				}
 			}
@@ -58,25 +77,25 @@ var SIPUcommon = (function (SIPUcommon, $, undefined) {
 
 	SIPUcommon.rundebuger = function (v) {
 		document.onkeydown = function (e) {
-			if (e.which == 83 && e.shiftKey === true && e.ctrlKey === true) {
-				if (DEBUGER.status) {
-					DEBUGER.status = false;
+			if (DEBUGER.LAYOUT.KEYEVENT(e)) {
+				if (DEBUGER.LAYOUT.STATUS) {
+					DEBUGER.LAYOUT.STATUS = false;
 					console.log("DEBUGER is Stop!");
 				} else {
-					DEBUGER.status = true;
+					DEBUGER.LAYOUT.STATUS = true;
 					console.log("DEBUGER is Run!");
 				}
-				SIPUcommon.showLayout(DEBUGER.status);
+				SIPUcommon.showLayout(DEBUGER.LAYOUT.STATUS);
 			}
-			if (e.which == 65 && e.shiftKey === true && e.ctrlKey === true) {
-				if (DEBUGER.statusEvent) {
-					DEBUGER.statusEvent = false;
+			if (DEBUGER.EVENT.KEYEVENT(e)) {
+				if (DEBUGER.EVENT.STATUS) {
+					DEBUGER.EVENT.STATUS = false;
 					console.log("EVENT Hide!");
 				} else {
-					DEBUGER.statusEvent = true;
+					DEBUGER.EVENT.STATUS = true;
 					console.log("EVENT Show!");
 				}
-				SIPUcommon.showEvent(DEBUGER.statusEvent);
+				SIPUcommon.showEvent(DEBUGER.EVENT.STATUS);
 			}
 		};
 	};
