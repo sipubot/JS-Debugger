@@ -1,9 +1,9 @@
 var SIPUcommon = (function (SIPUcommon, $, undefined) {
 
 	var DEBUGER = {
-		LAYOUT : {
-			STATUS : false,
-			KEYEVENT : function (e) {
+		LAYOUT: {
+			STATUS: false,
+			KEYEVENT: function (e) {
 				if (e.which == 83 && e.shiftKey === true && e.ctrlKey === true) {
 					return true;
 				} else {
@@ -11,14 +11,14 @@ var SIPUcommon = (function (SIPUcommon, $, undefined) {
 				}
 			}
 		},
-		EVENT : {
-			STATUS : false,
-			KEYEVENT : function (e) {
-					if (e.which == 65 && e.shiftKey === true && e.ctrlKey === true) {
-						return true;
-					} else {
-						return false;
-					}
+		EVENT: {
+			STATUS: false,
+			KEYEVENT: function (e) {
+				if (e.which == 65 && e.shiftKey === true && e.ctrlKey === true) {
+					return true;
+				} else {
+					return false;
+				}
 			}
 		},
 		ADDELEMENT: '<q sipu-common="" style="padding : 0; margin : 0 auto; position: absolute; border : 1px dotted red; float: right; font-size:3px; text-align:right; clear:both"></q>',
@@ -58,8 +58,25 @@ var SIPUcommon = (function (SIPUcommon, $, undefined) {
 	SIPUcommon.showEvent = function (bool) {
 		var node = document.body.getElementsByTagName("*");
 		var nodeevent;
-		$.each(node, function (i) {
-			node[i].addEventListener("mouseover", function () {
+		if (bool) {
+			$.each(node, function (i) {
+				node[i].addEventListener("mouseover", function () {
+					nodeevent = $._data(node[i], "events");
+					if (nodeevent !== undefined) {
+						$.each(nodeevent, function (i, ev) {
+							$.each(ev, function (j, e) {
+								console.log(ev[j]);
+								console.log(e.handler);
+								if (e.handler !== undefined && e.handler.toString().length > 0) {
+									console.log(e.handler);
+								}
+							});
+						});
+					}
+				}, false);
+			});
+		} else {
+			$.each(node, function (i) {
 				nodeevent = $._data(node[i], "events");
 				if (nodeevent !== undefined) {
 					$.each(nodeevent, function (i, ev) {
@@ -71,11 +88,39 @@ var SIPUcommon = (function (SIPUcommon, $, undefined) {
 						});
 					});
 				}
-			}, false);
-		});
+			});
+		}
 	};
 
-	SIPUcommon.rundebuger = function (v) {
+	SIPUcommon.showDetail = function (bool) {
+		var node = document.body.getElementsByTagName("*");
+		var str = '';
+		if (bool) {
+			$.each(node, function (i) {
+				$(this).click(function (e) {
+					if (e.ctrlKey) {
+						$(this).each(function () {
+							str = '';
+							$.each(this.attributes, function () {
+								// this.attributes is not a plain object, but an array
+								// of attribute nodes, which contain both the name and value
+								if (this.specified) {
+									str = str + this.name + ' :"' + this.value + '"" \n';
+								}
+							});
+							str = str + css($(this));
+							console.log($(this).attr());
+							//alert(str);
+						});
+					}
+				});
+			});
+		}
+	};
+
+
+
+	SIPUcommon.rundebuger = function () {
 		document.onkeydown = function (e) {
 			if (DEBUGER.LAYOUT.KEYEVENT(e)) {
 				if (DEBUGER.LAYOUT.STATUS) {
