@@ -26,6 +26,14 @@ var SIPUcommon = (function (SIPUcommon, $, undefined) {
 
 	};
 
+	function logs(val) {
+		if (val === undefined) {
+			console.log("");
+		} else {
+			console.log(val);
+		}
+	}
+
 	SIPUcommon.showLayout = function (bool) {
 		var i;
 		if (bool) {
@@ -65,62 +73,65 @@ var SIPUcommon = (function (SIPUcommon, $, undefined) {
 					if (nodeevent !== undefined) {
 						$.each(nodeevent, function (i, ev) {
 							$.each(ev, function (j, e) {
-								console.log(ev[j]);
-								console.log(e.handler);
+								logs(ev[j]);
+								logs(e.handler);
 								if (e.handler !== undefined && e.handler.toString().length > 0) {
-									console.log(e.handler);
+									logs(e.handler);
 								}
 							});
 						});
 					}
 				}, false);
 			});
-		} else {
-			$.each(node, function (i) {
-				nodeevent = $._data(node[i], "events");
-				if (nodeevent !== undefined) {
-					$.each(nodeevent, function (i, ev) {
-						$.each(ev, function (j, e) {
-							console.log(e.handler);
-							if (e.handler !== undefined && e.handler.toString().length > 0) {
-								console.log(e.handler);
-							}
-						});
-					});
+		} else {}
+	};
+
+	function loggingAttr(nodes, tags) {
+		//Dom list ,  tagname list  ex> nodes = document.getElementsByTagName('a'); , tags = ["name","href"]
+		if (nodes.length < 1 || tags.length < 1 || nodes === undefined || tags === undefined) {
+			return false;
+		}
+		var str = "";
+		var i = 0,
+			j = 0;
+		for (i = 0; i < nodes.length; i++) {
+			for (j = 0; j < tags.length; j++) {
+				if (nodes[i].hasAttribute(tags[j])) {
+					str = str + tags[j] + " : " + nodes[i].getAttribute(tags[j]) + "		";
 				}
-			});
+				logs(str);
+			}
+			str = "";
 		}
-	};
+	}
 
-	SIPUcommon.showDetail = function (bool) {
-		var node = document.body.getElementsByTagName("*");
-		var str = '';
-		if (bool) {
-			$.each(node, function (i) {
-				$(this).click(function (e) {
-					if (e.ctrlKey) {
-						$(this).each(function () {
-							str = '';
-							$.each(this.attributes, function () {
-								// this.attributes is not a plain object, but an array
-								// of attribute nodes, which contain both the name and value
-								if (this.specified) {
-									str = str + this.name + ' :"' + this.value + '"" \n';
-								}
-							});
-							str = str + css($(this));
-							console.log($(this).attr());
-							//alert(str);
-						});
-					}
-				});
-			});
+	function checkHtml() {
+		var i = 0;
+		if (document.title.length < 1) {
+			alert("check your page title!");
+		} else {
+			logs("title : " + document.title);
 		}
+		loggingAttr(document.getElementsByTagName('link'), ["rel", "type", "href"]);
+		loggingAttr(document.getElementsByTagName('script'), ["src"]);
+		loggingAttr(document.getElementsByTagName('meta'), ["name", "content"]);
+		loggingAttr(document.getElementsByTagName('meta'), ["property", "content"]);
+		loggingAttr(document.getElementsByTagName('a'), ["id", "href"]);
+		loggingAttr(document.getElementsByTagName('a'), ["class", "href"]);
+		loggingAttr(document.getElementsByTagName('*'), ["data-href"]);
+
+	}
+
+	SIPUcommon.checkNonline = function () {
+		return (function () {
+			if (window.location.protocol !== "http:" || window.location.protocol !== "https:") {
+				return true;
+			}
+		});
 	};
-
-
 
 	SIPUcommon.rundebuger = function () {
+		checkHtml();
 		document.onkeydown = function (e) {
 			if (DEBUGER.LAYOUT.KEYEVENT(e)) {
 				if (DEBUGER.LAYOUT.STATUS) {
@@ -146,8 +157,11 @@ var SIPUcommon = (function (SIPUcommon, $, undefined) {
 	};
 
 	SIPUcommon.run = function () {
+		console.dir(window);
 		this.rundebuger();
 	};
 	return SIPUcommon;
 })(window.SIPUcommon || {}, jQuery);
-SIPUcommon.run();
+if (SIPUcommon.checkNonline()) {
+	SIPUcommon.run();
+}
