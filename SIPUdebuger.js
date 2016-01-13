@@ -1,6 +1,15 @@
 var SIPUcommon = (function (SIPUcommon, $, undefined) {
 
 	var DEBUGER = {
+		NONLINE :{
+			CHECK : function () {
+					if (window.location.protocol === "http:" || window.location.protocol === "https:") {
+						return false;
+					} else {
+						return true;
+					}
+			}
+		},
 		LAYOUT: {
 			STATUS: false,
 			KEYEVENT: function (e) {
@@ -99,39 +108,30 @@ var SIPUcommon = (function (SIPUcommon, $, undefined) {
 				if (nodes[i].hasAttribute(tags[j])) {
 					str = str + tags[j] + " : " + nodes[i].getAttribute(tags[j]) + "		";
 				}
-				logs(str);
+				if (str.length > 0) {logs(str);}
 			}
 			str = "";
 		}
+		logs();
 	}
 
 	function checkHtml() {
-		var i = 0;
-		if (document.title.length < 1) {
-			alert("check your page title!");
-		} else {
-			logs("title : " + document.title);
-		}
-		loggingAttr(document.getElementsByTagName('link'), ["rel", "type", "href"]);
-		loggingAttr(document.getElementsByTagName('script'), ["src"]);
-		loggingAttr(document.getElementsByTagName('meta'), ["name", "content"]);
-		loggingAttr(document.getElementsByTagName('meta'), ["property", "content"]);
-		loggingAttr(document.getElementsByTagName('a'), ["id", "href"]);
-		loggingAttr(document.getElementsByTagName('a'), ["class", "href"]);
-		loggingAttr(document.getElementsByTagName('*'), ["data-href"]);
-
+			var i = 0;
+			if (document.title.length < 1) {
+				alert("check your page title!");
+			} else {
+				logs("title : " + document.title);
+			}
+			loggingAttr(document.getElementsByTagName('link'), ["rel", "type", "href"]);
+			loggingAttr(document.getElementsByTagName('script'), ["src"]);
+			loggingAttr(document.getElementsByTagName('meta'), ["name", "content"]);
+			loggingAttr(document.getElementsByTagName('meta'), ["property", "content"]);
+			loggingAttr(document.getElementsByTagName('a'), ["id", "href"]);
+			loggingAttr(document.getElementsByTagName('a'), ["class", "href"]);
+			loggingAttr(document.getElementsByTagName('*'), ["data-href"]);
 	}
 
-	SIPUcommon.checkNonline = function () {
-		return (function () {
-			if (window.location.protocol !== "http:" || window.location.protocol !== "https:") {
-				return true;
-			}
-		});
-	};
-
 	SIPUcommon.rundebuger = function () {
-		checkHtml();
 		document.onkeydown = function (e) {
 			if (DEBUGER.LAYOUT.KEYEVENT(e)) {
 				if (DEBUGER.LAYOUT.STATUS) {
@@ -150,6 +150,7 @@ var SIPUcommon = (function (SIPUcommon, $, undefined) {
 				} else {
 					DEBUGER.EVENT.STATUS = true;
 					console.log("EVENT Show!");
+					//add func
 				}
 				SIPUcommon.showEvent(DEBUGER.EVENT.STATUS);
 			}
@@ -157,11 +158,11 @@ var SIPUcommon = (function (SIPUcommon, $, undefined) {
 	};
 
 	SIPUcommon.run = function () {
-		console.dir(window);
-		this.rundebuger();
+		if (DEBUGER.NONLINE.CHECK) {
+			checkHtml();
+			this.rundebuger();
+		}
 	};
 	return SIPUcommon;
 })(window.SIPUcommon || {}, jQuery);
-if (SIPUcommon.checkNonline()) {
-	SIPUcommon.run();
-}
+SIPUcommon.run();
