@@ -150,7 +150,6 @@ var SIPUcommon = (function (SIPUcommon, $, undefined) {
 				} else {
 					DEBUGER.EVENT.STATUS = true;
 					console.log("EVENT Show!");
-					//add func
 				}
 				SIPUcommon.showEvent(DEBUGER.EVENT.STATUS);
 			}
