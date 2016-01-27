@@ -1,37 +1,24 @@
 
-                                           Js commons Tools
+#Js commons Tools
 
-  What is it?
-  -----------
+##What is it?
 
-  Easy Debugging for javascript code.
+Easy Debugging for javascript code.
 
-  The Latest Version
-  ------------------
+##Installation
+JQUERY
+and
+Please see the file SIPUdebuger.js copy your source folder and load html
+```
+\<script src="SIPUdebuger.js"\>\</script\>
+```
+##Use
 
-  Details of the latest version can be found on the
-  https://github.com/sipubot/JsCommons/
+**Show layOut :         Ctrl + Alt + S**
 
+**Show Trigger Event :  Ctrl + Alt + A**
 
-  Installation
-  ------------
-  !!!Need JQUERY
-  and
-  Please see the file SIPUdebuger.js copy your source folder and load html
+###Licensing
+Please see the file called SIPU LICENSE. & MIT(JQUERY)
 
-  \<script src="SIPUdebuger.js"\>\</script\>
-
-  Use
-  ------------
-  Show layOut :         Ctrl + Alt + S;
-
-  Show Trigger Event :  Ctrl + Alt + A;
-
-  Licensing
-  ---------
-
-  Please see the file called SIPU LICENSE. & MIT(JQUERY)
-
-  Contacts
-  --------
-    ddasik9901@gmail.com
+mailto:ddasik9901@gmail.com
