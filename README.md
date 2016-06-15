@@ -9,8 +9,8 @@ Easy Debugging for javascript code.
 JQUERY
 and
 Please see the file SIPUdebuger.js copy your source folder and load html
-```
-\<script src="SIPUdebuger.js"\>\</script\>
+```html
+<script src="SIPUdebuger.js"></script>
 ```
 ##Use
 
