@@ -6,6 +6,7 @@
 Easy Debugging for javascript code.
 
 ##Installation
+*It's need JQUERY*
 SIPUdebuger.min.js & cssCompress.min.js copy your source folder and load html
 ```html
 <script src="SIPUdebuger.min.js"></script>
