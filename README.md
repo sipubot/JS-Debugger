@@ -3,7 +3,7 @@
 
 ##What is it?
 
-Easy Debugging for javascript code.
+Easy Debugging for javascript, css & html.
 
 ##Installation
 *It's need JQUERY*
