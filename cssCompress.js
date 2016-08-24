@@ -60,10 +60,8 @@ var SIPUcss = (function(SIPUcss, $, undefined) {
     }
   }
   SIPUcss.init = function() {
-    window.onload = function() {
-      getCSS();
-      checkCss();
-    };
+		getCSS();
+		checkCss();
   };
   return SIPUcss;
 })(window.SIPUcss || {}, jQuery);
